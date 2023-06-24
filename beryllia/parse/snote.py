@@ -237,18 +237,16 @@ class SnoteParser(IRCParser):
     @_handler(
         r"""
         ^
-        # "*** XLINE:"
-        \*{3}\ XLINE:\
+        # "*** Notice --"
+        \*{3}\ Notice\ --
         # " jess!meow@libera/staff/cat/jess{jess}
         \ (?P<source>[^{]+)\{(?P<oper>[^}]+)\}
         # " added temporary"
-        \ added\ (?:timed|permanent)
-        # " K-Line on"
-        \(?:Z-line|G-line) on
-        \ \(?P<mask>\S+)\,
-        \ expires in (?P<duration>\d+):\
+        \ added\ (?:temporary|global)
+        # " 5 min. K-Line for"
+        \ (?P<duration>\d+)\ min\.\ K-Line\ for
         # " [*@1.2.3.4]"
-        \ \[(?P<mask>\S+)]\]
+        \ \[(?P<mask>\S+)\]
         # " [k-line reason]"
         \ \[(?P<reason>.*)\]
         $
@@ -289,12 +287,12 @@ class SnoteParser(IRCParser):
     @_handler(
         r"""
         ^
-        # "*** XLINE:"
-        \*{3}\ XLINE:\
+        # "*** Notice --"
+        \*{3}\ Notice\ --
         # " jess!meow@libera/staff/cat/jess{jess}"
         \ (?P<source>[^{]+)\{(?P<oper>[^}]+)\}
-        # " removed (?:temporary|global) for:"
-        \ removed\ (?:Z-line|G-line)\ on:
+        # " has removed the temporary K-Line for:"
+        \ has\ removed\ the\ (?:temporary|global)\ K-Line\ for:
         # " [*@1.2.3.4]"
         \ \[(?P<mask>\S+)\]
         $
